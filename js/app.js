@@ -25,18 +25,16 @@ Enemy.prototype.update = function(dt) {
 
 };
 
-
-
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y /* was set here to change enemy size, this.width, this.height*/);
-        drawBox(this.x, this.y + 77, 100, 67, "yellow");
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y /*change enemy size, this.width, this.height*/);
+        //drawing box for fine tuning collision
+        //drawBox(this.x, this.y + 77, 100, 67, "yellow");
 };
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-
 
 //started editing here
 var Player = function(x, y) {
@@ -52,35 +50,39 @@ Player.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    var self = this;
     if(this.y < 0){
-        setTimeout(function(){player.x = 202; player.y = 405}, dt);
+        setTimeout(function(){self.x = 202; self.y = 405}, dt);
     }
 };
 
 Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y /*was set here to change player size, this.width, this.height*/);
-        drawBox(this.x + 18, this.y + 65, 65, 75, "blue");
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y /*change player size, this.width, this.height*/);
+        //drawing box for fine tuning collision
+        //drawBox(this.x + 18, this.y + 65, 65, 75, "blue");
     if(this.y < 0){
         clearScore();
         this.score++;
-        keepScore();
+        this.keepScore();
     }
 };
 
 
 
 Player.prototype.handleInput = function(key){
+    var tileWidth = 101;
+    var tileHeight = 83;
     if(key == "left" && this.x > 0){
-        this.x -= 101;
+        this.x -= tileWidth;
     }
     if(key == "right" && this.x < 404){
-        this.x += 101;
+        this.x += tileWidth;
     }
     if(key == "down" && this.y < 390){
-        this.y += 83;
+        this.y += tileHeight;
     }
     if(key == "up" && this.y > 0){
-        this.y -= 83;
+        this.y -= tileHeight;
     }
 };
 
@@ -95,7 +97,7 @@ Player.prototype.checkCollisions = function(){
             this.y = 405;
             clearScore();
             this.score--;
-            keepScore();
+            this.keepScore();
         }
     }
 };
@@ -125,17 +127,10 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-//draws box around characters for precise collision
-function drawBox(x, y, width, height, color){
-    ctx.beginPath();
-    ctx.rect(x, y, width, height);
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = color;
-    ctx.stroke();
-};
+
 
 //to keep score of player
-function keepScore(){
+Player.prototype.keepScore = function (){
     ctx.fillStyle = "black";
     ctx.font = "bold 16px Arial";
     ctx.fillText("Score: " + player.score, 30, 30);
@@ -151,4 +146,13 @@ function clearScore(){
 -initially was going to the route of adding html content and removing it for the score
     var scores = document.getElementById("score").innerHTML = '<p>Score: ' + this.score + '</p>';
 -tried using this method for dt but didn't work well
-    this.x = this.x + this.speed * dt;*/
+    this.x = this.x + this.speed * dt;
+-draws box around characters for precise collision
+function drawBox(x, y, width, height, color){
+    ctx.beginPath();
+    ctx.rect(x, y, width, height);
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = color;
+    ctx.stroke();
+};
+*/
