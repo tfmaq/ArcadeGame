@@ -4,12 +4,12 @@ This game was designed with utilizing Object Oriented programming. I can't take 
 
 ## Playing game instructions
 
-### Starting the game:
+#### Starting the game:
 * Clone or download the files.
 * Unzipe and open the index.html file.
 * The game should start in your default browser.
 
-### It's pretty easy to play this game:
+#### It's pretty easy to play this game:
 * Using arrow keys will move the player up, down, left, and right.
 * Once player made contact a message will pop-up displaying you got hit.
 * Press OK and game will resets.
@@ -21,10 +21,3 @@ This game was designed with utilizing Object Oriented programming. I can't take 
 
 Good luck and have fun! I will further enhance the game when I get more time.
 I am going back to study now.
-
-
-
-
-
-
-
