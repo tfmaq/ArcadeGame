@@ -6,7 +6,7 @@ This game was designed with utilizing Object Oriented programming. I can't take 
 
 ### Starting the game:
 * Clone or download the files.
-* Unzipe and open the index.html file.
+* Unzipe and open the [index.html](ArcadeGame/index.html) file.
 * The game should start in your default browser.
 
 ### It's pretty easy to play this game:

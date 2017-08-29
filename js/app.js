@@ -1,12 +1,12 @@
 // Enemies our player must avoid
-var Enemy = function(x, y) {
+var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
     this.y = y;
     this.width = 75;
     this.height = 67;
-    // this.speed = 200;
+    this.speed = speed;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -21,8 +21,7 @@ Enemy.prototype.update = function(dt) {
     if(this.x >= 500){
         this.x = 0;
     }
-    this.x += dt + Math.floor(Math.random() * 10);
-
+    this.x += this.speed * dt;
 };
 
 // Draw the enemy on the screen, required method for game
@@ -47,12 +46,11 @@ var Player = function(x, y) {
 };
 
 Player.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+    //tried to initiate pause for restart but changing settimeout will result in wrong score and adds more to it
+    //dt gave me the correct score, since it resets after 1 frame
     var self = this;
     if(this.y < 0){
-        setTimeout(function(){self.x = 202; self.y = 405}, dt);
+        setTimeout(function(){self.x = 202; self.y = 405;}, dt);
     }
 };
 
@@ -64,10 +62,9 @@ Player.prototype.render = function() {
         clearScore();
         this.score++;
         this.keepScore();
+        console.log(this.score);
     }
 };
-
-
 
 Player.prototype.handleInput = function(key){
     var tileWidth = 101;
@@ -106,9 +103,9 @@ Player.prototype.checkCollisions = function(){
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var enemy1 = new Enemy(0, 58);
-var enemy2 = new Enemy(0, 140);
-var enemy3 = new Enemy(0, 228);
+var enemy1 = new Enemy(150, 58, 165);
+var enemy2 = new Enemy(0, 140, 270);
+var enemy3 = new Enemy(300, 228, 100);
 var allEnemies = [enemy1, enemy2, enemy3];
 
 var player = new Player(202, 405);
@@ -155,4 +152,6 @@ function drawBox(x, y, width, height, color){
     ctx.strokeStyle = color;
     ctx.stroke();
 };
+-to initiate random enemy speed, didn't use cause it was flickery movement
+    this.x += dt + Math.floor(Math.random() * 10);
 */
